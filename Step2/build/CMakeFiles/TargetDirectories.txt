@@ -1,0 +1,3 @@
+/home/ps/Source/TUTORIAL/Step2/build/CMakeFiles/rebuild_cache.dir
+/home/ps/Source/TUTORIAL/Step2/build/CMakeFiles/edit_cache.dir
+/home/ps/Source/TUTORIAL/Step2/build/CMakeFiles/Tutorial.dir
