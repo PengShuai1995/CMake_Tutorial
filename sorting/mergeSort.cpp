@@ -1,48 +1,69 @@
 #include <iostream>
 
 using namespace std;
-
-void merge(int *arr, int l, int m, int r)
+/**
+ * @brief Merges two subarrays of array[].
+ *  * first subarray is arr[begin..mid]
+ *    second array is arr[mid+1..end]
+ * @param array 
+ * @param left 
+ * @param mid 
+ * @param right 
+ */
+void merge(int array[], int const left,int const mid,int const right)
 {
-    int i,j,k;
-    int n1 = m - l +1;
-    int n2 = r-m;
-    int *L = new int[n1];
-    int *R = new int[n2];
-    for(int i = 0; i < n1; i++)
+    auto const subArrayOne = mid -left + 1;
+    auto const subArrayTwo = right - mid;
+    //create temp arrays
+    auto *leftArray = new int[subArrayOne];
+    auto *rightArray = new int[subArrayTwo];
+    //copy data to temp arrays leftArray[] and rightArray[]
+    for(auto i = 0; i < subArrayOne; i++)
     {
-        L[i] = arr[l+i];
+        leftArray[i] = array[left + i];
     }
-    for(int j = 0; j < n2; j++)
+    for(auto j = 0; j < subArrayTwo; j++)
     {
-        R[i] = arr[m+1+j];
+        rightArray[j] = array[mid + 1+j];
     }
-    i = 0;
-    j = 0;
-    k = l;
-    while(i < n1 || j < n2)
+    auto indexOfSubArrayOne = 0, //Initial index of first sub-array
+         indexOfSubArrayTwo = 0; //Initail iddex of second sub-array
+    int indexOfMergedArray = left; //Initial index of merged array
+    //merge the temp arrays back into array[left..right]
+    while (indexOfSubArrayOne < subArrayOne && indexOfSubArrayTwo < subArrayTwo)
     {
-        if(j >= n2 || (i < n1 && L[i] <= R[j]))
+        if(leftArray[indexOfSubArrayOne] <= rightArray[indexOfSubArrayTwo])
         {
-            arr[k] = L[i];
-            i++;
+            array[indexOfMergedArray] = leftArray[indexOfSubArrayOne];
+            indexOfSubArrayOne++;
         }else
         {
-            arr[k] = R[j];
-            j++;
+            array[indexOfMergedArray] = rightArray[indexOfSubArrayTwo];
+            indexOfSubArrayTwo++;
         }
-        k++;
+        indexOfMergedArray++;
     }
-    delete[] L;
-    delete[] R;
-}
-void mergeSort(int *arr, int l, int r)
-{
-    if(l < r)
+    //copy the remaining elements of right[], if there are any
+    while (indexOfSubArrayOne < subArrayOne)
     {
-        int m = l + (r -l)/2;
-        mergeSort(arr,l,m);
-        mergeSort(arr,m+1,r);
-        merge(arr,l,m,r);
+        array[indexOfMergedArray++] = subArrayOne[indexOfSubArrayOne++];
     }
+
+      while (indexOfSubArrayTwo < subArrayTwo)
+    {
+        array[indexOfMergedArray++] = subArrayOne[indexOfSubArrayTwo++];
+    }
+
+    
+    
 }
+void mergeSort(int arr[], int begin, int end)
+{
+    if(begin >= end)
+        return;
+    auto mid = beign + (end - begin)/2;
+    mergeSort(arr,begin,mid);
+    mergeSort(arr,mid+1,end);
+    merge(arr,begin,mid,end);
+}
+ auto filteredGraph = withLaneChanges ? (withAreas ? (graph.withAreasAndLaneChanges(routingCostId) : graph.withLaneChanges(routingCostId): withAreas ? graph.withAreasWithoutLaneChanges(routingCostId) ): graph.withoutLaneChanges(routingCostId);
