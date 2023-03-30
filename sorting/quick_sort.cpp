@@ -53,6 +53,7 @@ namespace sorting
         }
         quickSort(arr, 0, size);
         std::cout << "Sorted array" << std::endl;
+        std::cout << "This is at new place"<<std::endl;
         show(arr, size);
         delete[] arr;
         return 0;
